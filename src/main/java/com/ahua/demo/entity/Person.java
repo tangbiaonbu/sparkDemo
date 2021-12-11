@@ -1,5 +1,7 @@
 package com.ahua.demo.entity;
 
+import com.alibaba.fastjson.JSON;
+
 /**
  * 基本信息实体
  */
@@ -43,10 +45,6 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
-                ", sex='" + sex + '\'' +
-                '}';
+        return JSON.toJSONString(this);
     }
 }
