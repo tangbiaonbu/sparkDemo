@@ -220,7 +220,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.ahua.demo.SparkParams</mainClass>
+                            <mainClass>com.ahua.demo.SparkReadHive</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

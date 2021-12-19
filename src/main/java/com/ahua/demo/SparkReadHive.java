@@ -1,5 +1,7 @@
 package com.ahua.demo;
 
+import org.apache.spark.sql.Dataset;
+import org.apache.spark.sql.Row;
 import org.apache.spark.sql.SparkSession;
 
 /**
@@ -14,9 +16,44 @@ public class SparkReadHive {
                 .enableHiveSupport()
                 .config("spark.sql.warehouse.dir", "hdfs://192.168.1.100:8020/user/hive/warehouse")
                 .getOrCreate();
+
         sc.sql("use ahua");
-        sc.sql("select * from ahua.person").show();
-        sc.sql("select count(*) from ahua.person where ahua.person.name='tangbiao'").show();
+        Dataset<Row> sql = sc.sql("select * from ahua.person");
+        System.out.println(sql.count());
+        sql.show();
+        System.out.println("===============================================1");
+
+
+        Dataset<Row> sq1 = sc.sql("select count(name) from ahua.person");
+        sq1.show();
+        System.out.println(sq1.count());
+        System.out.println(sq1.first().toString());
+        System.out.println("===============================================2");
+
+
+        /*
+        6
++---+--------+
+| id|    name|
++---+--------+
+|  1|tangbiao|
+|  2|     ljh|
+|  3|   xukai|
+|  4|     srr|
+|  5|     xjx|
+|  6|     smm|
++---+--------+
+
+===============================================1
++-----------+
+|count(name)|
++-----------+
+|          6|
++-----------+
+
+1
+[6]
+        * */
         sc.stop();
     }
 }
