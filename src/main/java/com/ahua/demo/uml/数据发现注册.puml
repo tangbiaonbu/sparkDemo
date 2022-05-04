@@ -1,0 +1,16 @@
+@startuml
+title 注册流程的两种实现(common的static方法)
+participant "web" as web
+participant "数据地图" as map
+participant "管理中心" as lake
+participant "CatalogService" as cls
+autonumber
+web->map:启动数据发现任务
+activate map
+map->map:判断元数据类型是否需要注册
+map->lake:Feign 检查数据湖实例是否存在
+lake-->map:返回结果
+map->cls:注册元数据信息
+cls-->map:返回注册结果
+map->map:记录操作日志
+@enduml

@@ -1,0 +1,16 @@
+@startuml
+title 注册流程的两种实现(封装service)
+participant "web" as web
+participant "数据地图" as map
+participant "管理中心" as lake
+participant "CatalogService" as cls
+autonumber
+web->map:启动数据发现任务
+activate map
+map->lake:推送采集结果
+activate lake
+lake->lake:源类型是否需要注册or湖实例是否存在
+lake->cls:注册
+cls-->lake:返回注册结果
+lake-->map:返回注册结果
+@enduml
